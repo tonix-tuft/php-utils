@@ -95,4 +95,22 @@ final class ArrayUtils {
     }
     $curr = $value;
   }
+
+  /**
+   * Gets a nested value of an array.
+   *
+   * @param array $array An Array.
+   * @param string[]|int[] $nested Nested keys.
+   * @return mixed The nested value, or NULL.
+   */
+  public static function nestedArrayValue($array, $nested = []) {
+    $ret = $array;
+    foreach ($nested as $key) {
+      if (!isset($ret[$key])) {
+        return null;
+      }
+      $ret = $ret[$key];
+    }
+    return $ret;
+  }
 }
