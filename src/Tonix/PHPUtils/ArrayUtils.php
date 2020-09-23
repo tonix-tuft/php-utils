@@ -41,4 +41,26 @@ final class ArrayUtils {
   public static function arrayMapPreserveKeys($callable, $array) {
     return array_combine(array_keys($array), array_map($callable, $array));
   }
+
+  /**
+   * Checks whether all the keys given as parameter exist in an array.
+   * Each subsequent key is checked in an inner dimension of the given array.
+   *
+   * @param array $array An array
+   * @param string|int ...$keys Variadic argument of the keys to check if they all exist in the given array.
+   * @return bool TRUE if all the keys exist, each key on the corresponding dimension of the array, FALSE otherwise.
+   */
+  public static function arrayKeysExist($array, ...$keys) {
+    $current = $array;
+    if (empty($keys)) {
+      return false;
+    }
+    foreach ($keys as $key) {
+      if (!is_array($current) || !array_key_exists($key, $current)) {
+        return false;
+      }
+      $current = $current[$key];
+    }
+    return true;
+  }
 }
