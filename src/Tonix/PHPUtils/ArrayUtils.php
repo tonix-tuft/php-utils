@@ -63,4 +63,36 @@ final class ArrayUtils {
     }
     return true;
   }
+
+  /**
+   * Sets a nested array value.
+   *
+   * @param array $array A reference to a multidimensional array.
+   * @param array $keys Variadic arg. The keys and the leaf value (last parameter).
+   *                    Each level represents a nested key of the previous level/dimension.
+   *                    The last element is the leaf value to use (not a nested key).
+   * @return void
+   */
+  public static function setNestedArrayValue(array &$array, ...$keys) {
+    if (empty($keys)) {
+      return;
+    }
+
+    $value = array_pop($keys);
+    if (empty($keys)) {
+      return;
+    }
+
+    $curr = &$array;
+    foreach ($keys as $k) {
+      if (is_array($curr) && (!isset($curr[$k]) || !is_array($curr[$k]))) {
+        $curr[$k] = [];
+      } elseif (!is_array($curr)) {
+        $curr = [];
+      }
+
+      $curr = &$curr[$k];
+    }
+    $curr = $value;
+  }
 }
