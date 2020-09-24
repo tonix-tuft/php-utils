@@ -25,11 +25,29 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Tonix\PHPUtils\Enum;
+namespace Tonix\PHPUtils;
 
-trait EnumToKeyValTrait {
-  public static function toKeyVal() {
-    $reflectionClass = new \ReflectionClass(get_called_class());
-    return $reflectionClass->getConstants();
+/**
+ * Path-related utilities.
+ */
+class PathUtils {
+  /**
+   * Tests if the given path is relative.
+   *
+   * @param string $filePath The path to test.
+   * @return bool TRUE if the path is relative, FALSE otherwise.
+   */
+  public static function isRelativePath($filePath) {
+    return strpos($filePath, '/') !== 0;
+  }
+
+  /**
+   * Returns the extension of the file, without the dot (e.g.: `png`, `html`).
+   *
+   * @param string $filePath A file path.
+   * @return string The file extension. An empty string if the extension is missing.
+   */
+  public static function getFileExtension($filePath) {
+    return pathinfo($filePath, PATHINFO_EXTENSION);
   }
 }
