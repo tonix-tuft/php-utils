@@ -29,6 +29,8 @@ namespace Tonix\PHPUtils;
 
 /**
  * Path-related utilities.
+ *
+ * @author Anton Bagdatyev (Tonix) <antonytuft@gmail.com>
  */
 class PathUtils {
   /**

@@ -29,6 +29,8 @@ namespace Tonix\PHPUtils;
 
 /**
  * Combinatorics utilities.
+ *
+ * @author Anton Bagdatyev (Tonix) <antonytuft@gmail.com>
  */
 final class CombinatoricsUtils {
   /**

@@ -27,7 +27,17 @@
 
 namespace Tonix\PHPUtils\Enum;
 
+/**
+ * Enum-like trait for constants key/value pairs.
+ *
+ * @author Anton Bagdatyev (Tonix) <antonytuft@gmail.com>
+ */
 trait EnumToKeyValTrait {
+  /**
+   * Get an associative array of the defined constants of the called class (the "Late Static Binding" class).
+   *
+   * @return array An array of constants. Constant name in key, constant value in value.
+   */
   public static function toKeyVal() {
     $reflectionClass = new \ReflectionClass(get_called_class());
     return $reflectionClass->getConstants();
