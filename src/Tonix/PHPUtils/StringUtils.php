@@ -38,13 +38,14 @@ class StringUtils {
    *
    * @param string $format The format of the string, as in PHP's `sprintf()` function using `%key$s` as named placeholders.
    * @param array $args An associative array with the arguments to interpolate (e.g. `['key' => 'value']` to interpolate `%key$s`).
-   * @param bool $errorOnArgNotFound Throw an error or not if one argument is missing. By default, this method does not throw an error.
-   * @return string|bool The formatted string or a boolean FALSE if the `$errorOnArgNotFound` is truthy and at least one argument is missing.
+   * @param bool $warningOnArgNotFound Whether or not to trigger an E_USER_WARNING if one argument is missing. By default, this method does not trigger a warning
+   *                                   and the uninterpolated argument is left in the string as is.
+   * @return string|bool The formatted string or a boolean FALSE if the `$warningOnArgNotFound` is truthy and at least one argument is missing.
    */
   public static function sprintfn(
     $format,
     array $args = [],
-    $errorOnArgNotFound = false
+    $warningOnArgNotFound = false
   ) {
     // Map of argument names to their corresponding sprintf numeric argument value.
     $arg_nums = array_keys($args);
@@ -74,7 +75,7 @@ class StringUtils {
       $replace = null;
       if (!array_key_exists($arg_key, $arg_nums)) {
         // Programmer did not supply a value for the named argument found in the format string.
-        if ($errorOnArgNotFound) {
+        if ($warningOnArgNotFound) {
           user_error(
             "sprintfn(): Missing argument '${arg_key}'",
             E_USER_WARNING
