@@ -39,7 +39,7 @@ class HTMLUtils {
    * @param string $str The string to escape.
    * @return string The escaped string.
    */
-  function escape($str) {
+  public static function escape($str) {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
   }
 }
