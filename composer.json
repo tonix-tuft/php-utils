@@ -18,7 +18,8 @@
     "php": "^7.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.5"
+    "phpunit/phpunit": "^8.5",
+    "tonix-tuft/tmp-file": "^1.0"
   },
   "autoload": {
     "psr-4": {
