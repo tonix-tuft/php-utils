@@ -139,7 +139,7 @@ class StringUtils {
    * Generate a random hash chunk which doesn't appear within the string given as parameter, using the given optional hash function.
    *
    * @param string $str The string.
-   * @param callable The hashing function to use. Optional. Defaults to 'sha'.
+   * @param callable The hashing function to use. Optional. Defaults to 'sha1'.
    * @return string An hash chunk which is a string which doesn't appear within the given string, i.e. is not a substring of the string given as parameter.
    */
   public static function generateRandomHashChunkNotWithinString(
