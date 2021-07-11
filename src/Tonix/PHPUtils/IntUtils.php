@@ -50,4 +50,30 @@ class IntUtils {
     }
     return $num;
   }
+
+  /**
+   * Tests whether the given value is an integer or a string representing a valid integer.
+   *
+   * @param mixed $value A value.
+   * @return bool TRUE if the given value is an integer or a string representing a valid integer, FALSE otherwise.
+   */
+  public static function isIntOrIntString($value) {
+    $isPositiveIntString = function (string $value) {
+      return ctype_digit($value) && (strlen($value) <= 1 || $value[0] !== '0');
+    };
+    // prettier-ignore
+    return is_int($value) ||
+      (
+        is_string($value) &&
+        (
+          $isPositiveIntString($value)
+          ||
+          (
+            $value[0] === '-'
+            &&
+            $isPositiveIntString(substr($value, 1))
+          )
+        )
+      );
+  }
 }
