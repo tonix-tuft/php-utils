@@ -65,4 +65,43 @@ final class CombinatoricsUtils {
       }
     }
   }
+
+  /**
+   * Permutes an array, yielding its permutations through a generator.
+   *
+   * @param array An array of values to permute.
+   * @return \Generator A generator yielding to the next permutation of the given array.
+   */
+  public static function permute($array) {
+    $length = count($array);
+    $lengthMinusOne = $length - 1;
+    $innerGenerator = null;
+    $innerGenerator = function ($permutationIndexes = []) use (
+      $array,
+      $length,
+      $lengthMinusOne,
+      &$innerGenerator
+    ) {
+      $yield = count($permutationIndexes) == $lengthMinusOne;
+      for ($i = 0; $i < $length; $i++) {
+        if (in_array($i, $permutationIndexes)) {
+          continue;
+        } elseif ($yield) {
+          $toYield = [];
+          foreach (array_merge($permutationIndexes, [$i]) as $index) {
+            $toYield[] = $array[$index];
+          }
+          yield $toYield;
+        } else {
+          foreach (
+            $innerGenerator(array_merge($permutationIndexes, [$i]))
+            as $permute
+          ) {
+            yield $permute;
+          }
+        }
+      }
+    };
+    return $innerGenerator();
+  }
 }

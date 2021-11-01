@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Tonix\PHPUtils\IOUtils;
-use Tonix\PHPUtils\Misc\MiscDir;
 
 $tmpFile = IOUtils::tmpFile();
 $tmpFile2 = IOUtils::tmpFile([
