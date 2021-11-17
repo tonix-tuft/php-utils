@@ -177,11 +177,13 @@ class StringUtils {
         range(0, 9)
       );
     }
+
     $str = '';
-    $count = count($whitelist) - 1;
+    $lastIndex = count($whitelist) - 1;
     for ($i = 0; $i < $length; $i++) {
-      $str .= $whitelist[rand(0, $count)];
+      $str .= $whitelist[random_int(0, $lastIndex)];
     }
+
     return $str;
   }
 }
